@@ -197,45 +197,169 @@ body.theme-a {
   grid-area: visual;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  padding: 8px 0;
 }
-.theme-a .hero-visual-bg-text {
+@media (min-width: 900px) { .theme-a .hero-visual { min-height: 460px; } }
+@media (min-width: 1280px) { .theme-a .hero-visual { min-height: 520px; } }
+
+/* --- 背景演出：YES / WE / CAN の大型タイポグラフィ ---
+   説明用のテキストではなく、右側エリア全体を使った背景グラフィック。
+   相関図（.orbit / .orbit-flow）のサイズではなく .hero-visual の高さいっぱいを基準に、
+   YESを上部・WEを中央・CANを下部に大胆に配置する。前面のITビジュアルより
+   低いコントラスト・低いz-indexにして、あくまで背景の世界観として機能させる。 */
+.theme-a .hero-bg-type {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2% 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.theme-a .hero-bg-type span {
+  font-weight: 900;
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.07);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@media (min-width: 640px) { .theme-a .hero-bg-type span { font-size: 120px; } }
+@media (min-width: 900px) { .theme-a .hero-bg-type span { font-size: 150px; } }
+@media (min-width: 1280px) { .theme-a .hero-bg-type span { font-size: 190px; } }
+
+/* --- ファーストビュー右側：WEB/SYSTEM/AI/EC/DESIGNが中心（Y.W.C.）につながり、
+   事業成長へ広がっていくことを示す図解ビジュアル --- */
+.theme-a .orbit {
+  position: relative;
+  z-index: 1;
+  width: min(76vw, 300px);
+  aspect-ratio: 1 / 1;
+}
+@media (min-width: 640px) { .theme-a .orbit { width: 320px; } }
+@media (min-width: 900px) { .theme-a .orbit { width: 360px; } }
+.theme-a .orbit-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.theme-a .orbit-lines .orbit-ring {
+  fill: none;
+  stroke: rgba(255,255,255,0.16);
+  stroke-width: 0.6;
+  stroke-dasharray: 2.2 3.2;
+}
+.theme-a .orbit-lines line {
+  stroke: rgba(255,255,255,0.18);
+  stroke-width: 0.6;
+}
+.theme-a .orbit-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, #2b2226, var(--a-navy) 72%);
+  border: 1.5px solid var(--ywc-red);
+  box-shadow: 0 0 0 8px rgba(227,32,30,0.09), 0 10px 26px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  z-index: 2;
+}
+.theme-a .orbit-hub img { width: 30%; max-width: 30px; border-radius: 6px; display: block; }
+.theme-a .orbit-hub span { font-size: 9.5px; font-weight: 800; color: #fff; letter-spacing: 0.02em; white-space: nowrap; }
+.theme-a .orbit-node {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 23%;
+  z-index: 2;
+}
+.theme-a .orbit-node-icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ywc-red);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
-  font-size: clamp(46px, 11vw, 90px);
-  letter-spacing: 0.01em;
-  color: rgba(255,255,255,0.05);
-  white-space: nowrap;
-  text-transform: uppercase;
-  z-index: 0;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
-.theme-a .hero-illustration {
+.theme-a .orbit-node-icon .icon { width: 52%; height: 52%; }
+.theme-a .orbit-node-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+/* --- 相関図の続き：5領域 → Y.W.C. → 業務メリット → 事業成長、の一連の流れ --- */
+.theme-a .orbit-flow {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 340px;
-}
-@media (min-width: 900px) { .theme-a .hero-illustration { max-width: 420px; } }
-
-.theme-a .hero-brand-lockup {
   display: flex;
-  align-items: baseline;
-  gap: 9px;
-  font-weight: 900;
-  font-size: 21px;
-  letter-spacing: 0.03em;
-  margin-bottom: 14px;
-  text-transform: uppercase;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-.theme-a .hero-brand-lockup .lw-yes,
-.theme-a .hero-brand-lockup .lw-we { color: #fff; }
-.theme-a .hero-brand-lockup .lw-can { color: var(--ywc-red); }
-@media (min-width: 640px) { .theme-a .hero-brand-lockup { font-size: 25px; } }
+.theme-a .orbit-flow-arrow { color: var(--ywc-red); opacity: 0.85; flex-shrink: 0; }
+.theme-a .orbit-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 320px;
+}
+.theme-a .orbit-benefit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 7px 13px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.theme-a .orbit-benefit .icon { width: 14px; height: 14px; color: var(--ywc-red); flex-shrink: 0; }
+.theme-a .orbit-growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ywc-red), var(--ywc-red-dark));
+  padding: 11px 24px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(227,32,30,0.35);
+  white-space: nowrap;
+}
 
 .theme-a .hero-eyebrow {
   display: inline-flex;
@@ -280,29 +404,34 @@ body.theme-a {
   max-width: 46em;
 }
 .theme-a .hero-cta-row { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.theme-a .btn-reassure { margin: 0; font-size: 13px; font-weight: 700; }
 
 /* 信頼バッジ（設立年・拠点数など事実ベース） */
+/* --- 実績ストリップ（FV直下）：ITに詳しくない経営者向けの安心材料 --- */
+.theme-a .trust-strip {
+  background: var(--ywc-gray-bg);
+  padding: 26px 0;
+}
 .theme-a .trust-badges {
-  margin-top: 34px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
-@media (min-width: 640px) { .theme-a .trust-badges { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) { .theme-a .trust-badges { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
 .theme-a .trust-badge {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: var(--ywc-white);
+  border: 1px solid var(--ywc-line);
   border-radius: var(--radius-m);
   padding: 14px 12px;
   text-align: center;
 }
-.theme-a .trust-badge .num { font-size: 20px; font-weight: 800; color: #fff; }
-.theme-a .trust-badge .num small { font-size: 12px; font-weight: 600; margin-left: 2px; }
+.theme-a .trust-badge .num { font-size: 19px; font-weight: 800; color: var(--ywc-black); }
+.theme-a .trust-badge .num small { font-size: 11.5px; font-weight: 600; margin-left: 2px; color: var(--ywc-text-sub); }
 .theme-a .trust-badge .label {
-  margin-top: 4px;
+  margin-top: 3px;
   font-size: 11.5px;
   line-height: 1.4;
-  color: rgba(255,255,255,0.6);
+  color: var(--ywc-text-mute);
   /* 1行・2行どちらの内容でも高さが揃うよう、2行分の高さを確保 */
   min-height: calc(1.4em * 2);
 }
