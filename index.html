@@ -33,13 +33,14 @@
 <meta name="twitter:description" content="名古屋の企業向けIT相談ならY.W.C.株式会社。ホームページ制作、業務システム、ECサイト、AI活用など、何から始めればいいか分からない段階からご相談いただけます。">
 <!-- twitter:image は og:image と同じ画像を指定予定のため、OGP画像確定後にあわせて追加してください -->
 
+<link rel="icon" type="image/svg+xml" href="img/logo/dxhub-symbol.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 
 <meta name="theme-color" content="#16181C">
-<link rel="stylesheet" href="css/base.css?v=202609111148">
-<link rel="stylesheet" href="css/style.css?v=202609111148">
+<link rel="stylesheet" href="css/base.css?v=202609131616">
+<link rel="stylesheet" href="css/style.css?v=202609131616">
 
 <script type="application/ld+json">
 {
@@ -65,11 +66,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="#main">
-      <span class="brand-mark"><img src="img/ywc-logo.png" alt="Y.W.C.株式会社" width="32" height="32"></span>
-      <span>
-        Y.W.C.株式会社
-        <span class="brand-sub">IT事業のご相談窓口</span>
-      </span>
+      <img class="brand-logo" src="img/logo/dxhub-logo.svg" alt="DX HUB" height="26">
+      <span class="brand-sub">IT事業のご相談窓口</span>
     </a>
     <nav class="site-nav" aria-label="ページ内ナビゲーション">
       <a href="#before-after">Before / After</a>
@@ -573,11 +571,38 @@
         <p class="final-yeswecan">YES, WE CAN.</p>
         <h2 class="section-title"><span class="ja-nowrap">「できるか分からない」</span><span class="ja-nowrap">その段階から、</span><span class="ja-nowrap">ご相談</span><span class="ja-nowrap">ください。</span></h2>
         <p class="section-lead">「こんなことも頼めるの？」という一言からで構いません。Y.W.C.株式会社が丁寧にお話をお伺いします。</p>
-        <a class="btn btn-primary btn-lg" href="#" data-cta="final">
-          <!-- TODO: DMまたは問い合わせ先へのリンクを設定 -->
-          DMで無料相談する
-        </a>
-        <p class="mini-note">※本ページはデザイン検討用デモのため、送信機能は実装されていません。</p>
+        <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="95dda44a-da55-46c6-b4d2-dfdd1a8b7ba4">
+          <input type="hidden" name="subject" value="DX HUB Webサイトからお問い合わせがありました">
+          <input type="hidden" name="from_name" value="DX HUB">
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
+
+          <div class="form-row">
+            <label for="cf-company">会社名<span class="form-optional">（任意）</span></label>
+            <input type="text" id="cf-company" name="company" autocomplete="organization">
+          </div>
+          <div class="form-row">
+            <label for="cf-name">お名前<span class="form-required">必須</span></label>
+            <input type="text" id="cf-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="cf-email">メールアドレス<span class="form-required">必須</span></label>
+            <input type="email" id="cf-email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="cf-phone">電話番号<span class="form-optional">（任意）</span></label>
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-row">
+            <label for="cf-message">相談内容・お問い合わせ内容<span class="form-required">必須</span></label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" data-cta="final">
+            DMで無料相談する
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -586,9 +611,10 @@
 
 <footer class="site-footer">
   <div class="container">
-    <div class="foot-brand"><span class="brand-mark"><img src="img/ywc-logo.png" alt="Y.W.C.株式会社" width="32" height="32" loading="lazy"></span>Y.W.C.株式会社</div>
+    <div class="foot-brand"><img src="img/logo/dxhub-logo-white.svg" alt="DX HUB" height="28" loading="lazy"></div>
     <p>人材サービス事業・IT事業・代理店事業・エネルギー事業などを展開する企業です。</p>
     <dl class="foot-grid">
+      <div><dt>運営会社</dt><dd>YWC株式会社</dd></div>
       <div><dt>本社</dt><dd>愛知県名古屋市中区錦2丁目10-13 <span class="ja-nowrap">SC錦ANNEX 4F</span></dd></div>
       <div><dt>設立</dt><dd>2010年6月</dd></div>
       <div><dt>公式サイト</dt><dd><a class="foot-official" href="https://www.ywc-inc.com/" target="_blank" rel="noopener">https://www.ywc-inc.com/</a></dd></div>
@@ -604,6 +630,6 @@
   </div>
 </div>
 
-<script src="js/main.js?v=202609111148"></script>
+<script src="js/main.js?v=202609131616"></script>
 </body>
 </html>

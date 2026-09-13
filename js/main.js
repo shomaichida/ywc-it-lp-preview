@@ -65,6 +65,79 @@
     });
   }
 
+  // --- 問い合わせフォーム送信（Web3Forms） ---
+  var contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    var submitBtn = contactForm.querySelector('button[type="submit"]');
+    var statusEl = contactForm.querySelector(".form-status");
+    var defaultBtnText = submitBtn ? submitBtn.textContent.trim() : "";
+
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      // honeypot：ボットがチェックを入れていたら送信しない
+      var botcheck = contactForm.querySelector('input[name="botcheck"]');
+      if (botcheck && botcheck.checked) {
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "送信中...";
+      }
+      if (statusEl) {
+        statusEl.textContent = "送信中...";
+        statusEl.classList.remove("is-success", "is-error");
+      }
+
+      // 任意項目が空欄の場合は、通知メールに不要な空欄行が出ないよう送信データから除外する
+      var formData = new FormData(contactForm);
+      ["company", "phone"].forEach(function (key) {
+        if (!formData.get(key)) {
+          formData.delete(key);
+        }
+      });
+
+      fetch(contactForm.action, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          if (data && data.success) {
+            if (statusEl) {
+              statusEl.textContent = "お問い合わせを送信しました。ありがとうございます。";
+              statusEl.classList.add("is-success");
+            }
+            contactForm.reset();
+          } else {
+            if (statusEl) {
+              statusEl.textContent = "送信に失敗しました。時間をおいて再度お試しください。";
+              statusEl.classList.add("is-error");
+            }
+          }
+        })
+        .catch(function () {
+          if (statusEl) {
+            statusEl.textContent = "送信に失敗しました。時間をおいて再度お試しください。";
+            statusEl.classList.add("is-error");
+          }
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = defaultBtnText;
+          }
+        });
+    });
+  }
+
   // --- スクロールリビール（対応ブラウザのみ／非対応は即表示） ---
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealEls.length) {

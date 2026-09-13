@@ -160,18 +160,9 @@ main { display: block; }
   font-size: 15px;
   color: var(--ywc-black);
 }
-.brand-mark {
-  width: 32px;
-  height: 32px;
-  background: var(--ywc-black);
-  color: var(--ywc-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  border-radius: 4px;
+.brand-logo {
+  display: block;
+  width: auto;
   flex-shrink: 0;
 }
 .brand-sub {
@@ -203,6 +194,7 @@ main { display: block; }
   white-space: nowrap;
 }
 .btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .btn-primary {
   background: var(--ywc-red);
   color: var(--ywc-white);
