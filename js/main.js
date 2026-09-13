@@ -65,6 +65,18 @@
     });
   }
 
+  // --- GA4：CTAクリック計測（既存のdata-cta属性を利用、フォーム送信ボタンは対象外） ---
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("a[data-cta]");
+    if (!el) return;
+    if (typeof gtag === "function") {
+      gtag("event", "cta_click", {
+        cta_location: el.getAttribute("data-cta") || "",
+        cta_text: el.textContent.replace(/\s+/g, " ").trim(),
+      });
+    }
+  });
+
   // --- 問い合わせフォーム送信（Web3Forms） ---
   var contactForm = document.getElementById("contact-form");
   if (contactForm) {
@@ -115,6 +127,10 @@
               statusEl.textContent = "お問い合わせを送信しました。ありがとうございます。";
               statusEl.classList.add("is-success");
             }
+            // GA4：送信成功時のみ計測（個人情報は含めない）
+            if (typeof gtag === "function") {
+              gtag("event", "generate_lead", { form_name: "contact" });
+            }
             contactForm.reset();
           } else {
             if (statusEl) {
@@ -136,6 +152,26 @@
           }
         });
     });
+  }
+
+  // --- GA4：問い合わせフォーム到達計測（スクロールリビールとは別のIntersectionObserverで、1回のみ送信） ---
+  if (contactForm && "IntersectionObserver" in window) {
+    var contactFormViewed = false;
+    var gaFormIo = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !contactFormViewed) {
+            contactFormViewed = true;
+            if (typeof gtag === "function") {
+              gtag("event", "contact_form_view");
+            }
+            gaFormIo.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    gaFormIo.observe(contactForm);
   }
 
   // --- スクロールリビール（対応ブラウザのみ／非対応は即表示） ---
