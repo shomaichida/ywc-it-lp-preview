@@ -1,15 +1,6 @@
-# Y.W.C.株式会社 IT事業LP - robots.txt（本番公開用テンプレート）
-#
-# このファイルは本番公開時にドメインルート
-# （例: https://本番ドメイン/robots.txt）へ配置することを想定したテンプレートです。
-#
-# クロール制御はこのファイルではなく、index.html側の <meta name="robots"> で行っています。
-# 現在 index.html には社内確認用の noindex を設定していますが、
-# Googlebotがそのタグを読み取れるよう、このrobots.txt自体はクロールを許可（Allow）しています。
-# 本番公開時は、index.htmlのnoindex行を削除してください。
+# DX HUB（Y.W.C.株式会社） - robots.txt
 
 User-agent: *
 Allow: /
 
-# TODO: 本番ドメイン確定後、下記URLを実際のドメインに置き換えてください
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://dxhub.ywc-inc.com/sitemap.xml
