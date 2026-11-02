@@ -358,6 +358,13 @@ main { display: block; }
   color: rgba(255,255,255,0.85);
   text-decoration: underline;
 }
+.foot-privacy { margin-top: 24px; }
+.foot-privacy a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.foot-privacy a:hover { color: var(--ywc-white); }
 
 /* --- スティッキーCTA（モバイル固定） --- */
 .sticky-cta {

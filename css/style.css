@@ -881,6 +881,18 @@ body.theme-a {
   box-shadow: 0 0 0 3px rgba(227,32,30,0.4);
 }
 .theme-a .contact-form .btn { margin-top: 8px; }
+.theme-a .form-privacy {
+  margin: 4px 0 12px;
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.theme-a .form-privacy a {
+  color: var(--ywc-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.theme-a .form-privacy a:hover { color: var(--ywc-red); }
 .theme-a .form-status {
   margin-top: 14px;
   font-size: 13.5px;
